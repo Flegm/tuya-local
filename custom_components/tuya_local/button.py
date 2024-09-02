@@ -57,4 +57,4 @@ class TuyaLocalButton(TuyaLocalEntity, ButtonEntity):
 
     async def async_press(self):
         """Press the button"""
-        await self._button_dp.async_set_value(self._device, self._button_dp.default if self._button_dp.default else True)
+        await self._button_dp.async_set_value(self._device, self._button_dp["button"].default if self._button_dp["button"].default else True)
