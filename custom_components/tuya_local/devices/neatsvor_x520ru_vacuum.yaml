@@ -1,0 +1,180 @@
+name: Робот-пылесос
+products:
+  id: dbougox8k7ntyxeh
+  name: Neatsvor X520RU
+primary_entity:
+  entity: vacuum
+  dps:
+    - id: 1
+      type: boolean
+      name: Питание
+    - id: 2
+      type: boolean
+      name: Активен
+    - id: 3
+      type: string
+      name: Команда
+      mapping:
+        - dps_val: "standby"
+          value: "В ожидание"
+        - dps_val: "smart"
+          value: "Интеллектуальный режим"
+        - dps_val: "spiral"
+          value: "Местная уборка"
+        - dps_val: "chargego"
+          value: "К док-станции"
+    - id: 5
+      type: string
+      name: status
+      mapping:
+        - dps_val: "0"
+          value: "Ожидание"
+        - dps_val: "1"
+          value: "Интеллектуальный режим"
+        - dps_val: "2"
+          value: "Уборка с водой"
+        - dps_val: "3"
+          value: "По стенкам"
+        - dps_val: "4"
+          value: "Подзарядка"
+        - dps_val: "5"
+          value: "Зарядка"
+        - dps_val: "6"
+          value: "Местная уборка"
+        - dps_val: "7"
+          value: "Ручной режим"
+    - id: 14
+      type: string
+      name: fan_speed
+      optional: true
+      mapping:
+        - dps_val: "max"
+          value: "Максимальная"
+        - dps_val: "strong"
+          value: "Сильная"
+        - dps_val: "normal"
+          value: "Средняя"
+        - dps_val: "weak"
+          value: "Слабая"
+    - id: 18
+      type: integer
+      name: Ошибка
+      mapping:
+        - dps_val: "0"
+          value: "Без ошибок"
+        - dps_val: "1"
+          value: "Ошибка бокового сканирования"
+        - dps_val: "3"
+          value: "Неисправность левого колеса"
+        - dps_val: "4"
+          value: "Неисправность контейнера для мусора"
+        - dps_val: "6"
+          value: "Ошибка потери поверхности"
+        - dps_val: "8"
+          value: "Прочие ошибки"
+secondary_entities:
+  - entity: button
+    name: Уборка с водой
+    category: config
+    icon: "mdi:water"
+    dps:
+    - id: 3
+      type: string
+      name: button
+      device_class: update
+      mapping:
+        - dps_val: "mop"
+          value: "Уборка с водой"
+  - entity: button
+    name: Уборка по стенкам
+    category: config
+    icon: "mdi:wall"
+    dps:
+    - id: 3
+      type: string
+      name: button
+      default: "wall_follow"
+  - entity: select
+    name: Ручное управление
+    category: config
+    icon: mdi:gamepad-outline
+    dps:
+      - id: 4
+        type: string
+        name: option
+        mapping:
+          - dps_val: "forward"
+            value: "Прямо"
+          - dps_val: "backward"
+            value: "Назад"
+          - dps_val: "turn_left"
+            value: "Налево"
+          - dps_val: "turn_right"
+            value: "Направо"
+          - dps_val: "stop"
+            value: "Стоп"
+  - entity: sensor
+    class: battery
+    dps:
+      - id: 6
+        name: sensor
+        type: integer
+        unit: "%"
+        class: measurement
+  - entity: select
+    name: Подача воды
+    category: config
+    icon: "mdi:water"
+    dps:
+      - id: 101
+        type: string
+        name: option
+        mapping:
+          - dps_val: "low_step"
+            value: "Слабая"
+          - dps_val: "mid_step"
+            value: "Средняя"
+          - dps_val: "high_step"
+            value: "Сильная"
+  - entity: switch
+    name: Звук
+    category: config
+    icon: mdi:bell-cancel-outline
+    dps:
+      - id: 102
+        type: boolean
+        name: switch
+        optional: true
+  - entity: select
+    name: Язык
+    category: config
+    icon: mdi:earth
+    dps:
+      - id: 29
+        type: string
+        name: option
+        mapping:
+          - dps_val: "russian"
+            value: "Русский"
+          - dps_val: "english"
+            value: "English"
+  - entity: sensor
+    class: duration
+    name: Время последней уборки
+    dps:
+      - id: 17
+        name: sensor
+        type: integer
+        unit: min
+        class: measurement
+  - entity: sensor
+    name: Площадь последней уборки
+    icon: mdi:floor-plan
+    dps:
+      - id: 16
+        name: sensor
+        type: integer
+        unit: m²
+        class: measurement
+        mapping:
+          - scale: 10
