@@ -96,7 +96,6 @@ secondary_entities:
       mapping:
         - dps_val: "wall_follow"
           value: "wall_follow"
-          default: "wall_follow"
   - entity: select
     name: Ручное управление
     category: config
