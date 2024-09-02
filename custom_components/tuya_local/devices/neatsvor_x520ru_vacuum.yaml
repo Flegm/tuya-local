@@ -93,7 +93,10 @@ secondary_entities:
     - id: 3
       type: string
       name: button
-      default: "wall_follow"
+      mapping:
+        - dps_val: "wall_follow"
+          value: "wall_follow"
+          default: "wall_follow"
   - entity: select
     name: Ручное управление
     category: config
