@@ -57,6 +57,9 @@ class TuyaLocalButton(TuyaLocalEntity, ButtonEntity):
 
     async def async_press(self):
         """Press the button"""
-        mapping = self._button_dp._find_map_for_dps(None, self._device)
-        value = mapping.get("mapping", [{}])[0].get("dps_val")
-        await self._button_dp.async_set_value(self._device, value)
+        _LOGGER.warning(
+            "%s",
+            self._button_dp
+        )
+        value = None
+        await self._button_dp.async_set_value(self._device, value if value else True)
